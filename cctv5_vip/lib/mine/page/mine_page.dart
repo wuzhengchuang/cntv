@@ -20,30 +20,19 @@ class _MinePageState extends State<MinePage>
         backgroundColor: Colors.transparent,
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xFF222224).withOpacity(1.0),
-              Color(0xFF222224).withOpacity(0.95),
-              Color(0xFF222224).withOpacity(0.9),
-            ], stops: [
-              0.0,
-              0.5,
-              1.0
-            ]),
+            gradient: LinearGradient(colors: [Colors.black, Colors.black]),
           ),
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color(0xFF222224).withOpacity(1.0),
-            Color(0xFF222224).withOpacity(0.95),
-            Color(0xFF222224).withOpacity(0.9),
-          ], stops: [
-            0.0,
-            0.5,
-            1.0
-          ]),
-        ),
+      body: Stack(
+        children: [
+          Image(
+            image: AssetImage('images/assets/black_bg.png'),
+            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            height: 300,
+          ),
+        ],
       ),
     );
   }
