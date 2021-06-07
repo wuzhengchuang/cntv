@@ -8,42 +8,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Image(
-          image: AssetImage('images/assets/cntv_logo.png'),
-          width: 53,
+    return Stack(
+      children: [
+        Image(
+          image: AssetImage('images/assets/black_bg.png'),
+          fit: BoxFit.cover,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
         ),
-        backgroundColor: Colors.transparent,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xFF222224).withOpacity(1.0),
-              Color(0xFF222224).withOpacity(0.95),
-              Color(0xFF222224).withOpacity(0.9),
-            ], stops: [
-              0.0,
-              0.5,
-              1.0
-            ]),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            elevation: 0,
+            title: Image(
+              image: AssetImage('images/assets/cntv_logo.png'),
+              width: 53,
+            ),
+            backgroundColor: Colors.transparent,
           ),
+          body: Container(),
         ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color(0xFF222224).withOpacity(1.0),
-            Color(0xFF222224).withOpacity(0.95),
-            Color(0xFF222224).withOpacity(0.9),
-          ], stops: [
-            0.0,
-            0.5,
-            1.0
-          ]),
-        ),
-      ),
+      ],
     );
   }
 

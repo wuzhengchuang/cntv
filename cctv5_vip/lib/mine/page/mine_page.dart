@@ -10,30 +10,27 @@ class _MinePageState extends State<MinePage>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          '个人中心',
-          style: TextStyle(fontSize: Vip5ThemeData.NAV_TITLE_SIZE),
+    return Stack(
+      children: [
+        Image(
+          image: AssetImage('images/assets/black_bg.png'),
+          fit: BoxFit.cover,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
         ),
-        backgroundColor: Colors.transparent,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [Colors.black, Colors.black]),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            elevation: 0,
+            title: Text(
+              '个人中心',
+              style: TextStyle(fontSize: Vip5ThemeData.NAV_TITLE_SIZE),
+            ),
+            backgroundColor: Colors.transparent,
           ),
+          body: Container(),
         ),
-      ),
-      body: Stack(
-        children: [
-          Image(
-            image: AssetImage('images/assets/black_bg.png'),
-            fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width,
-            height: 300,
-          ),
-        ],
-      ),
+      ],
     );
   }
 
