@@ -21,7 +21,7 @@ class NetConfig {
         break;
       case EnvType.T100:
         {
-          String BASEURL = 'https://static-vip.sports.cctv.com/';
+          String BASEURL = 'https://t100-static-vip.sports.cctv.com/';
         }
         break;
       case EnvType.P100:
