@@ -31,7 +31,7 @@ class _CNTVAppState extends State<CNTVApp> {
       initialRoute: '/',
       routes: {
         RoutesConfig.VIP5WEBPAGE: (_) => Vip5WebView(
-              url: NetConfig.PROTOCOLURL,
+              url: NetConfig().PROTOCOLURL,
             ),
         RoutesConfig.VIP5ROOTPAGE: (_) => RootPage(),
       },

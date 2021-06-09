@@ -4,9 +4,6 @@ import 'dart:io';
 import 'package:cctv5_vip/animation/vip5_page_router.dart';
 import 'package:cctv5_vip/base/root_page.dart';
 import 'package:cctv5_vip/config/net_config.dart';
-import 'package:cctv5_vip/config/routes_config.dart';
-import 'package:cctv5_vip/config/types.dart';
-import 'package:cctv5_vip/style/vip5_theme_data.dart';
 import 'package:cctv5_vip/web/vip5_web_page.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -74,7 +71,7 @@ class _ProtocolWidgetState extends State<ProtocolWidget> {
                 onWebViewCreated: (WebViewController webViewController) {
                   _webViewController = webViewController;
                   _webViewController.loadUrl(
-                    NetConfig.AGREEPROTOCOLURL,
+                    NetConfig().AGREEPROTOCOLURL,
                   );
                 }),
           )),
@@ -93,7 +90,7 @@ class _ProtocolWidgetState extends State<ProtocolWidget> {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) {
                     return Vip5WebView(
-                      url: NetConfig.PROTOCOLURL,
+                      url: NetConfig().PROTOCOLURL,
                       result: (result) {
                         print(result['result']);
                       },

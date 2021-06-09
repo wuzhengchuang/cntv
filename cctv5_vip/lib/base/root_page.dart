@@ -1,5 +1,7 @@
+import 'package:cctv5_vip/config/net_config.dart';
 import 'package:cctv5_vip/event/page/event_page.dart';
 import 'package:cctv5_vip/home/page/home_page.dart';
+import 'package:cctv5_vip/http/http.dart';
 import 'package:cctv5_vip/mine/page/mine_page.dart';
 import 'package:cctv5_vip/style/vip5_theme_data.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +53,18 @@ class _RootPageState extends State<RootPage> {
   ];
   List<Widget> _childs = [HomePage(), EventPage(), MinePage()];
   PageController _pageController = PageController(initialPage: 0);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Http.instance.get(NetConfig().BASEURL, NetConfig().MAINCONFIGJSON,
+        success: (data) {
+      print(data);
+    }, error: (String reason, int statusCode) {
+      print(reason);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
