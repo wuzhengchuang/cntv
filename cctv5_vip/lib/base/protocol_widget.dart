@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cctv5_vip/animation/vip5_page_router.dart';
 import 'package:cctv5_vip/base/root_page.dart';
 import 'package:cctv5_vip/config/net_config.dart';
+import 'package:cctv5_vip/tools/vip5_loading.dart';
 import 'package:cctv5_vip/web/vip5_web_page.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -118,7 +119,13 @@ class _ProtocolWidgetState extends State<ProtocolWidget> {
                   Expanded(
                       child: InkWell(
                     onTap: () {
-                      exit(0);
+//                      exit(0);
+//                    Vip5LoadingDialog().sho
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Vip5LoadingDialog();
+                          });
                     },
                     child: Container(
                       height: 45,
