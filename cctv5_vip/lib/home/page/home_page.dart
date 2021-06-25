@@ -1,3 +1,11 @@
+import 'package:cctv5_vip/config/net_config.dart';
+import 'package:cctv5_vip/home/model/banner.dart' as HomeBanner;
+import 'package:cctv5_vip/home/model/home.dart';
+import 'package:cctv5_vip/home/model/home_event.dart';
+import 'package:cctv5_vip/home/model/video.dart';
+import 'package:cctv5_vip/home/page/event_list_cell.dart';
+import 'package:cctv5_vip/home/page/video_cell.dart';
+import 'package:cctv5_vip/http/http.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -7,10 +15,47 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
+  List _dataArray = [];
+  Widget _cellForRow(BuildContext context, int index) {
+    Map<String, dynamic> map = _dataArray[index];
+    if (map['type'] == 3) {
+      //视频
+      Video video = Video.fromJson(map);
+      return VideoCell(
+        video,
+        index: index,
+      );
+    } else if (map['type'] == 1) {
+      //轮播图
+      HomeBanner.Banner banner = HomeBanner.Banner.fromJson(map);
+    } else if (map['type'] == 2) {
+      //赛程
+      HomeEvent event = HomeEvent.fromJson(map);
+      return EventListCell(
+        event,
+        index: index,
+      );
+    }
+    return VideoCell(
+      null,
+      index: index,
+    );
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    Map<String, dynamic> params = {'page': 1};
+    Http.instance.get(NetConfig().BASEURL, NetConfig().index_interface,
+        success: (data) {
+      Home home = Home.fromJson(data);
+      if (home.control.status == 200) {
+        print('${home.data.index}');
+        _dataArray.addAll(home.data.index);
+        setState(() {});
+      }
+    }, error: (String reason, int statusCode) {});
   }
 
   @override
@@ -33,7 +78,14 @@ class _HomePageState extends State<HomePage>
             ),
             backgroundColor: Colors.transparent,
           ),
-          body: Container(),
+          body: Container(
+            color: Colors.white,
+            child: ListView.builder(
+              itemBuilder: _cellForRow,
+              padding: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
+              itemCount: _dataArray.length,
+            ),
+          ),
         ),
       ],
     );

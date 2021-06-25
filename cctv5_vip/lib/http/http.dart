@@ -35,6 +35,10 @@ class Http {
       onSuccess success,
       onError error}) {
     String path = baseUrl + url;
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      path = url;
+    }
+    print('请求地址:$path');
     _dio.get(path, queryParameters: params,
         onReceiveProgress: (int count, int total) {
       if (onReceiveProgress != null) {
