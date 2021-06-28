@@ -1,3 +1,4 @@
+import 'package:cctv5_vip/base/root_provider.dart';
 import 'package:cctv5_vip/config/net_config.dart';
 import 'package:cctv5_vip/event/page/event_page.dart';
 import 'package:cctv5_vip/home/page/home_page.dart';
@@ -5,6 +6,7 @@ import 'package:cctv5_vip/http/http.dart';
 import 'package:cctv5_vip/mine/page/mine_page.dart';
 import 'package:cctv5_vip/style/vip5_theme_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RootPage extends StatefulWidget {
   @override
@@ -12,7 +14,6 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  int _currentIndex = 0;
   List<BottomNavigationBarItem> _items = [
     BottomNavigationBarItem(
         icon: Image(
@@ -52,7 +53,6 @@ class _RootPageState extends State<RootPage> {
         title: Text('我的')),
   ];
   List<Widget> _childs = [HomePage(), EventPage(), MinePage()];
-  PageController _pageController = PageController(initialPage: 0);
   @override
   void initState() {
     // TODO: implement initState
@@ -67,28 +67,37 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Vip5ThemeData.TAB_BG_COLOR,
-        elevation: 0,
-        selectedFontSize: Vip5ThemeData.TAB_TITLE_SIZE,
-        unselectedFontSize: Vip5ThemeData.TAB_TITLE_SIZE,
-        selectedItemColor: Vip5ThemeData.TAB_SELECT_COLOR,
-        unselectedItemColor: Vip5ThemeData.TAB_UNSELECT_COLOR,
-        items: _items,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-            _pageController.jumpToPage(_currentIndex);
-          });
-        },
-      ),
-      body: PageView(
-        controller: _pageController,
-        children: _childs,
-        physics: NeverScrollableScrollPhysics(),
-      ),
-    );
+    return Consumer<RootProvider>(builder: (
+      _,
+      __,
+      ___,
+    ) {
+      int currentIndex =
+          Provider.of<RootProvider>(context, listen: false).currentIndex;
+      PageController pageController =
+          Provider.of<RootProvider>(context, listen: false).pageController;
+      return Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Vip5ThemeData.TAB_BG_COLOR,
+          elevation: 0,
+          selectedFontSize: Vip5ThemeData.TAB_TITLE_SIZE,
+          unselectedFontSize: Vip5ThemeData.TAB_TITLE_SIZE,
+          selectedItemColor: Vip5ThemeData.TAB_SELECT_COLOR,
+          unselectedItemColor: Vip5ThemeData.TAB_UNSELECT_COLOR,
+          items: _items,
+          currentIndex: currentIndex,
+          onTap: (index) {
+            Provider.of<RootProvider>(context, listen: false)
+                .changeIndex(index);
+            pageController.jumpToPage(index);
+          },
+        ),
+        body: PageView(
+          controller: pageController,
+          children: _childs,
+          physics: NeverScrollableScrollPhysics(),
+        ),
+      );
+    });
   }
 }

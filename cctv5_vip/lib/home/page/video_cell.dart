@@ -6,9 +6,10 @@ class VideoCell extends StatelessWidget {
   final int index;
   VideoCell(this.video, {Key key, this.index}) : super(key: key);
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: Colors.white,
       padding: EdgeInsets.only(
-          left: 15, right: 15, top: index == 0 ? 0 : 10, bottom: 0),
+          left: 15, right: 15, top: index == 3 ? 16 : 10, bottom: 0),
       child: AspectRatio(
         aspectRatio: 16.0 / 9.0,
         child: Stack(

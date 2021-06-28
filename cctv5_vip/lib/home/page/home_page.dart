@@ -3,6 +3,7 @@ import 'package:cctv5_vip/home/model/banner.dart' as HomeBanner;
 import 'package:cctv5_vip/home/model/home.dart';
 import 'package:cctv5_vip/home/model/home_event.dart';
 import 'package:cctv5_vip/home/model/video.dart';
+import 'package:cctv5_vip/home/page/banner_widget.dart';
 import 'package:cctv5_vip/home/page/event_list_cell.dart';
 import 'package:cctv5_vip/home/page/video_cell.dart';
 import 'package:cctv5_vip/http/http.dart';
@@ -28,6 +29,9 @@ class _HomePageState extends State<HomePage>
     } else if (map['type'] == 1) {
       //轮播图
       HomeBanner.Banner banner = HomeBanner.Banner.fromJson(map);
+      return Vip5BannerWidget(
+        banner: banner,
+      );
     } else if (map['type'] == 2) {
       //赛程
       HomeEvent event = HomeEvent.fromJson(map);
@@ -79,7 +83,7 @@ class _HomePageState extends State<HomePage>
             backgroundColor: Colors.transparent,
           ),
           body: Container(
-            color: Colors.white,
+//            color: Colors.white,
             child: ListView.builder(
               itemBuilder: _cellForRow,
               padding: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),

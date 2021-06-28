@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class EventPainter extends CustomPainter {
@@ -15,9 +17,9 @@ class EventPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // TODO: implement paint
     _path.moveTo(radius, 0);
-    _path.relativeLineTo(20, 0);
+    _path.relativeLineTo(30, 0);
     _path.relativeLineTo(0, 104.5);
-    _path.relativeLineTo(-20, 0);
+    _path.relativeLineTo(-30, 0);
     _path.quadraticBezierTo(0, 104.5 / 2, radius, 0);
     canvas.drawPath(_path, _paint);
   }

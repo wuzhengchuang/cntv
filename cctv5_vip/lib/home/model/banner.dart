@@ -12,8 +12,8 @@ class Banner {
 }
 
 class BannerItem {
-  int type;
-  int id;
+  String type;
+  String id;
   String imgUrl;
   String title;
   String url;
@@ -22,24 +22,24 @@ class BannerItem {
       {this.type, this.id, this.imgUrl, this.title, this.url, this.data});
   factory BannerItem.fromJson(Map<String, dynamic> json) {
     return BannerItem(
-        id: json['id'],
-        type: json['type'],
-        imgUrl: json['imgUrl'],
-        title: json['title'],
-        url: json['url'],
+        id: json['id'] as String,
+        type: json['type'] as String,
+        imgUrl: json['imgUrl'] as String,
+        title: json['title'] as String,
+        url: json['url'] as String,
         data: BannerVideo.fromJson(json['data']));
   }
 }
 
 @JsonSerializable()
 class BannerVideo {
-  int copyright;
-  int id;
+  String copyright;
+  String id;
   String cateId;
   String title;
   String time;
   String end_time;
-  int status;
+  String status;
   String round;
   String liveChannel;
   String timeStr;

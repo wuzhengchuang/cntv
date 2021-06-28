@@ -1,6 +1,8 @@
 import 'package:cctv5_vip/home/model/home_event.dart';
 import 'package:cctv5_vip/home/page/drag_widget.dart';
 import 'package:cctv5_vip/home/page/event_cell.dart';
+import 'package:cctv5_vip/home/page/event_more_data_widget.dart';
+import 'package:cctv5_vip/tools/vip5_page_tool.dart';
 import 'package:flutter/material.dart';
 
 class EventListCell extends StatefulWidget {
@@ -16,12 +18,27 @@ class _EventListCellState extends State<EventListCell> {
   ListView _listView;
   double _radius = 0;
   bool _needJumpToEventPage = false;
-  EventCell _cellForRow(BuildContext context, int currentIndex) {
-    HomeEventItem item = HomeEventItem.fromJson(widget.data.data[currentIndex]);
-    return EventCell(
-      item,
-      index: currentIndex,
-    );
+  String _moreStr = '查看更多';
+  double _rightSpace = -30;
+  Widget _cellForRow(BuildContext context, int currentIndex) {
+    if (currentIndex < widget.data.data.length) {
+      HomeEventItem item =
+          HomeEventItem.fromJson(widget.data.data[currentIndex]);
+      return EventCell(
+        item,
+        index: currentIndex,
+      );
+    } else {
+      return GestureDetector(
+        onTap: () {
+          Vip5PageTool.jumpToPageController(context, 1);
+        },
+        child: Container(
+          width: 30,
+          color: Colors.transparent,
+        ),
+      );
+    }
   }
 
   @override
@@ -29,13 +46,12 @@ class _EventListCellState extends State<EventListCell> {
     // TODO: implement initState
     super.initState();
     _controller = ScrollController();
-
     _listView = ListView.builder(
       controller: _controller,
-      padding: EdgeInsets.only(left: 15, top: 15, bottom: 14.5, right: 15),
+      padding: EdgeInsets.only(left: 15, top: 5, bottom: 14.5, right: 0),
       scrollDirection: Axis.horizontal,
       itemBuilder: _cellForRow,
-      itemCount: widget.data.data.length,
+      itemCount: widget.data.data.length + 1,
     );
   }
 
@@ -44,8 +60,7 @@ class _EventListCellState extends State<EventListCell> {
       double cardWidth, double space, double viewPortWidth) {
     return (widget.data.data.length - 1) * space +
         widget.data.data.length * cardWidth -
-        viewPortWidth -
-        15;
+        viewPortWidth;
   }
 
   @override
@@ -53,40 +68,65 @@ class _EventListCellState extends State<EventListCell> {
     double viewPortWidth = MediaQuery.of(context).size.width;
     double listViewContentWidth = _getListViewContentWidth(
         (viewPortWidth - 15 - 10 - 20) / 2, 5, viewPortWidth);
-
     return Container(
-      height: 134.5,
+      color: Colors.white,
+      height: 124.5,
       child: Stack(
-        alignment: AlignmentDirectional.centerEnd,
+        alignment: AlignmentDirectional(1.0, -0.4),
         children: [
-          DragWidget(
-            radius: _radius,
-          ),
-          NotificationListener(
+          Positioned(
+              right: _rightSpace,
+              child: EventMoreDataWidget(
+                child: DragWidget(
+                  radius: _radius,
+                ),
+                moreStr: _moreStr,
+              )),
+          NotificationListener<ScrollNotification>(
             child: _listView,
-            onNotification: (ScrollNotification notification) {
-              if (notification.metrics.pixels.toInt() > listViewContentWidth) {
-                print('列表滚动到底部了');
-                _radius =
-                    notification.metrics.pixels.toInt() - listViewContentWidth;
+            onNotification: (notification) {
+              if (listViewContentWidth - notification.metrics.pixels.toInt() <=
+                  30) {
+                _rightSpace = (notification.metrics.pixels.toInt() -
+                            listViewContentWidth) >
+                        0
+                    ? 0
+                    : (notification.metrics.pixels.toInt() -
+                        listViewContentWidth);
+                if (notification.metrics.pixels.toInt() >
+                    listViewContentWidth) {
+                  _moreStr = '松开查看';
+                  _radius = notification.metrics.pixels.toInt() -
+                      listViewContentWidth;
+                } else {
+                  _radius = 0;
+                  _moreStr = '查看更多';
+                }
                 setState(() {});
+              } else {
+                if (_rightSpace > -30) {
+                  _rightSpace = -30;
+                  setState(() {});
+                }
               }
+
               if (notification is ScrollUpdateNotification) {
                 //判断松开手指和松开手指的位置
                 if (notification.dragDetails == null &&
-                    (notification.metrics.pixels.toInt() -
+                    ((notification.metrics.pixels.toInt() -
                             listViewContentWidth) >
-                        5) {
+                        5)) {
                   _needJumpToEventPage = true;
                 }
               }
               if (notification is ScrollEndNotification) {
                 if (_needJumpToEventPage) {
                   //停止滑动后跳转到其它页面
-                  print('跳转到其它页面');
                   _needJumpToEventPage = false;
+                  Vip5PageTool.jumpToPageController(context, 1);
                 }
               }
+              return true;
             },
           ),
         ],

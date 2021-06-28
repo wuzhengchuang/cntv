@@ -22,13 +22,13 @@ Map<String, dynamic> _$BannerToJson(Banner instance) => <String, dynamic>{
 
 BannerVideo _$BannerVideoFromJson(Map<String, dynamic> json) {
   return BannerVideo(
-    copyright: json['copyright'] as int,
-    id: json['id'] as int,
+    copyright: json['copyright'] as String,
+    id: json['id'] as String,
     cateId: json['cateId'] as String,
     title: json['title'] as String,
     time: json['time'] as String,
     end_time: json['end_time'] as String,
-    status: json['status'] as int,
+    status: json['status'] as String,
     round: json['round'] as String,
     liveChannel: json['liveChannel'] as String,
     timeStr: json['timeStr'] as String,
