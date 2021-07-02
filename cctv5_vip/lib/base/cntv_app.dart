@@ -24,6 +24,7 @@ class _CNTVAppState extends State<CNTVApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        brightness: Brightness.light,
         primaryColor: Colors.red,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,

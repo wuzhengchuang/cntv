@@ -47,6 +47,7 @@ class _EventListCellState extends State<EventListCell> {
     super.initState();
     _controller = ScrollController();
     _listView = ListView.builder(
+      physics: BouncingScrollPhysics(),
       controller: _controller,
       padding: EdgeInsets.only(left: 15, top: 5, bottom: 14.5, right: 0),
       scrollDirection: Axis.horizontal,

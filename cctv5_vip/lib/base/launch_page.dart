@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:cctv5_vip/config/types.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'protocol_widget.dart';
 
@@ -24,7 +22,7 @@ class _LaunchPageState extends State<LaunchPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,

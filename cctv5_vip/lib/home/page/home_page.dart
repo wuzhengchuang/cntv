@@ -75,6 +75,8 @@ class _HomePageState extends State<HomePage>
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
+            brightness: Brightness.light,
+            centerTitle: true,
             elevation: 0,
             title: Image(
               image: AssetImage('images/assets/cntv_logo.png'),
@@ -85,6 +87,7 @@ class _HomePageState extends State<HomePage>
           body: Container(
 //            color: Colors.white,
             child: ListView.builder(
+              physics: BouncingScrollPhysics(),
               itemBuilder: _cellForRow,
               padding: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
               itemCount: _dataArray.length,
