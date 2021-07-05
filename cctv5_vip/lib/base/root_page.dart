@@ -79,7 +79,7 @@ class _RootPageState extends State<RootPage> {
       return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Vip5ThemeData.TAB_BG_COLOR,
-          elevation: 0,
+          elevation: 2,
           selectedFontSize: Vip5ThemeData.TAB_TITLE_SIZE,
           unselectedFontSize: Vip5ThemeData.TAB_TITLE_SIZE,
           selectedItemColor: Vip5ThemeData.TAB_SELECT_COLOR,

@@ -1,4 +1,5 @@
 import 'package:cctv5_vip/config/types.dart';
+import 'package:cctv5_vip/home/page/vip5_appbar.dart';
 import 'package:cctv5_vip/style/vip5_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -29,20 +30,7 @@ class _Vip5WebViewState extends State<Vip5WebView> {
       widget.result = args['result'];
     }
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Container(
-            padding: EdgeInsets.only(top: 18, bottom: 18, left: 0, right: 10),
-            child: Image(
-              image: AssetImage('images/assets/nav_back.png'),
-              fit: BoxFit.fitHeight,
-            ),
-          ),
-        ),
+      appBar: Vip5AppBar(
         backgroundColor: Vip5ThemeData.NAV_BG_COLOR,
         title: Text(
           '$_title',

@@ -6,16 +6,18 @@ class VideoCell extends StatelessWidget {
   final int index;
   VideoCell(this.video, {Key key, this.index}) : super(key: key);
   Widget build(BuildContext context) {
+    double height = (MediaQuery.of(context).size.width - 30) * 9.0 / 16;
+    height = double.parse(height.toStringAsFixed(0));
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.only(
-          left: 15, right: 15, top: index == 3 ? 16 : 10, bottom: 0),
-      child: AspectRatio(
-        aspectRatio: 16.0 / 9.0,
+      padding: EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 0),
+      child: Container(
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
             Container(
+              width: MediaQuery.of(context).size.width,
+              height: height,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: video != null
@@ -23,6 +25,13 @@ class VideoCell extends StatelessWidget {
                         : AssetImage('images/assets/1.jpeg'),
                     fit: BoxFit.fill),
                 borderRadius: BorderRadius.circular(5),
+              ),
+              child: Center(
+                child: Image(
+                  image: AssetImage('images/assets/video_play.png'),
+                  width: 50,
+                  height: 50,
+                ),
               ),
             ),
             Container(
@@ -70,13 +79,6 @@ class VideoCell extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-            ),
-            Center(
-              child: Image(
-                image: AssetImage('images/assets/video_play.png'),
-                width: 50,
-                height: 50,
               ),
             ),
           ],

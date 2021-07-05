@@ -85,6 +85,7 @@ class _Vip5CircleAnimationState extends State<Vip5CircleAnimation>
   void dispose() {
     // TODO: implement dispose
     _animationController.dispose();
+    print('Vip5CircleAnimation销毁了');
     super.dispose();
   }
 }

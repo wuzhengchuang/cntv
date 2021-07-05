@@ -1,3 +1,4 @@
+import 'package:cctv5_vip/home/page/vip5_appbar.dart';
 import 'package:cctv5_vip/style/vip5_theme_data.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +21,9 @@ class _MinePageState extends State<MinePage>
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            elevation: 0,
+          appBar: Vip5AppBar(
+            // centerTitle: true,
+            // elevation: 0,
             title: Text(
               '个人中心',
               style: TextStyle(fontSize: Vip5ThemeData.NAV_TITLE_SIZE),

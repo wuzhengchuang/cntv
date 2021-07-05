@@ -71,7 +71,7 @@ class _EventListCellState extends State<EventListCell> {
         (viewPortWidth - 15 - 10 - 20) / 2, 5, viewPortWidth);
     return Container(
       color: Colors.white,
-      height: 124.5,
+      height: 125,
       child: Stack(
         alignment: AlignmentDirectional(1.0, -0.4),
         children: [

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.seca.cctv5_vip">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="cctv5_vip"
         android:icon="@mipmap/ic_launcher">
@@ -9,7 +10,8 @@
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:usesCleartextTraffic="true">
             <meta-data
                 android:name="io.flutter.aoo.android.SplashScreenUntilFirstFrame"
                 android:value="true"
@@ -42,4 +44,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+
 </manifest>

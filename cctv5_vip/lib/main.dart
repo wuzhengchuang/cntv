@@ -8,6 +8,20 @@ import 'package:provider/provider.dart';
 import 'base/cntv_app.dart';
 
 void main() {
+  if (Platform.isIOS) {
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  } else {
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (BuildContext context) {
@@ -16,14 +30,4 @@ void main() {
     ],
     child: CNTVApp(),
   ));
-  if (Platform.isAndroid) {
-    print('运行了安卓');
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarBrightness: Brightness.light);
-    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-  }
 }
-// void main() {
-//   FileManager.redFileInfo();
-// }

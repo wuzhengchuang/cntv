@@ -41,10 +41,12 @@ class _Vip5BannerWidgetState extends State<Vip5BannerWidget> {
   @override
   Widget build(BuildContext context) {
     _bannerHeight =
-        (MediaQuery.of(context).size.width - 20 - 20 - 10) * 189.0 / 336 + 15;
+        (MediaQuery.of(context).size.width - 20 - 20 - 10) * 189.0 / 336 +
+            15 +
+            10;
     _bannerHeight = double.parse(_bannerHeight.toStringAsFixed(0));
-    print('重新创建了build  ${_bannerHeight}');
     return Container(
+      padding: EdgeInsets.only(top: 10),
       height: _bannerHeight,
       child: Stack(
         children: [

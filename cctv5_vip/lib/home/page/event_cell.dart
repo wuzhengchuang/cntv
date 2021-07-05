@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cctv5_vip/base/right_to_left_router.dart';
 import 'package:cctv5_vip/event/page/event_detail_page.dart';
 import 'package:cctv5_vip/extension/size_string.dart';
@@ -16,7 +18,15 @@ class EventCell extends StatelessWidget {
     double tiemStrWidth = data.timeStr.width(12, FontWeight.normal);
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(RightToLeftRouter(child: EventDetailPage()));
+        if (Platform.isAndroid) {
+          Navigator.of(context)
+              .push(RightToLeftRouter(child: EventDetailPage()));
+        } else {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+            return EventDetailPage();
+          }));
+        }
       },
       child: Container(
         padding: EdgeInsets.only(right: 5),
