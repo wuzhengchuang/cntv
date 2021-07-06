@@ -43,8 +43,8 @@ class NetConfig {
   }
 
   EnvType ENV = EnvType.Default;
-  String AGREEPROTOCOLURL = 'http://www.apppark.cn/privacy.html';
-  String PROTOCOLURL = 'http://www.zhibo.tv/privacypolicy.html';
+  String AGREEPROTOCOLURL = 'https://www.apppark.cn/privacy.html';
+  String PROTOCOLURL = 'https://www.zhibo.tv/privacypolicy.html';
   String BASEURL = 'https://static-vip.sports.cctv.com/';
   String MAINCONFIGJSON = 'config.json';
   String index_interface = 'https://api-vip.sports.cctv.com/feed/index';
