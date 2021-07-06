@@ -2,12 +2,18 @@ PODS:
   - Flutter (1.0.0)
   - orientation (0.0.1):
     - Flutter
+  - video_player (0.0.1):
+    - Flutter
+  - vip5_video_player (0.0.1):
+    - Flutter
   - webview_flutter (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - orientation (from `.symlinks/plugins/orientation/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
+  - vip5_video_player (from `.symlinks/plugins/vip5_video_player/ios`)
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
 
 EXTERNAL SOURCES:
@@ -15,12 +21,18 @@ EXTERNAL SOURCES:
     :path: Flutter
   orientation:
     :path: ".symlinks/plugins/orientation/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
+  vip5_video_player:
+    :path: ".symlinks/plugins/vip5_video_player/ios"
   webview_flutter:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   orientation: 6c9203efe86ce4cff379756910f18b2d745628c3
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
+  vip5_video_player: 488f32041928a67a387617d217f589cd02a63c16
   webview_flutter: 9f491a9b5a66f2573946a389b2677987b0ff8c0b
 
 PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d

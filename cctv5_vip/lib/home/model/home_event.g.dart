@@ -22,15 +22,15 @@ Map<String, dynamic> _$HomeEventToJson(HomeEvent instance) => <String, dynamic>{
 
 HomeEventItem _$HomeEventItemFromJson(Map<String, dynamic> json) {
   return HomeEventItem(
-    id: json['id'] as String,
-    copyright: json['copyright'] as String,
+    id: json['id'].toString(),
+    copyright: json['copyright'].toString(),
     cateId: json['cateId'] as String,
     title: json['title'] as String,
     status: json['status'] as String,
     liveType: json['liveType'] as int,
     isThird: json['isThird'] as int,
-    time: json['time'] as String,
-    end_time: json['end_time'] as String,
+    time: json['time'].toString(),
+    end_time: json['end_time'].toString(),
     round: json['round'] as String,
     liveChannel: json['liveChannel'] as String,
     timeStr: json['timeStr'] as String,
