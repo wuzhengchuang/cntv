@@ -87,10 +87,16 @@ class Vip5BannerItemWidget extends StatelessWidget {
       margin: EdgeInsets.only(left: 5, right: 5),
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: NetworkImage(
-              '${bannerItem.imgUrl}',
-            ),
-            fit: BoxFit.fitHeight),
+            image: ResizeImage(Image.network(bannerItem.imgUrl).image,
+                width:
+                    (MediaQuery.of(context).size.width - 20 - 20 - 10).toInt(),
+                height: ((MediaQuery.of(context).size.width - 20 - 20 - 10) *
+                            189.0 /
+                            336 +
+                        15 +
+                        10)
+                    .toInt()),
+            fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(15),
       ),
       // child: Image(

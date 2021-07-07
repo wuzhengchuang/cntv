@@ -1,23 +1,27 @@
+import 'package:cctv5_vip/home/model/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vip5_video_player/vip5_video_player.dart';
 
 class VideoDetailPage extends StatefulWidget {
+  final Video video;
+  VideoDetailPage({Key key, this.video}) : super(key: key);
   @override
   _VideoDetailPageState createState() => _VideoDetailPageState();
 }
 
 class _VideoDetailPageState extends State<VideoDetailPage> {
-  Vip5VideoPlayer _player = Vip5VideoPlayer(
-    params: {
-      'videoUrl': '82c540483d6e47bca0ab09ac26f05d26',
-      'title': '[拳击]人在奥运年——李倩：使命在肩 奋斗有我'
-    },
-  );
+  Vip5VideoPlayer _player;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _player = Vip5VideoPlayer(
+      params: {
+        'videoUrl': widget.video.guid,
+        'title': widget.video.title,
+      },
+    );
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
   }
@@ -36,7 +40,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                     child: _player,
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: 30,
                     left: 0,
                     right: 0,
                     height: 30,
@@ -51,9 +55,26 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                         ),
                         InkWell(
                           onTap: () {
+                            _player.pause();
+                          },
+                          child: Text('暂停'),
+                        ),
+                        InkWell(
+                          onTap: () {
                             _player.stop();
                           },
                           child: Text('停止'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            _player.stop();
+                            SystemChrome.setPreferredOrientations([
+                              DeviceOrientation.portraitUp,
+                              DeviceOrientation.portraitDown
+                            ]);
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('返回页面'),
                         ),
                       ],
                     ),
@@ -64,9 +85,16 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
           ),
         ),
         onWillPop: () {
-          SystemChrome.setPreferredOrientations(
-              [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-          return Future.value(true);
+          print('onWillPop');
+
+          return null;
         });
+  }
+
+  @override
+  void dispose() {
+    print('VideoDetailPage销毁了');
+    // TODO: implement dispose
+    super.dispose();
   }
 }

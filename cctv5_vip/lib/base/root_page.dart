@@ -1,6 +1,6 @@
 import 'package:cctv5_vip/base/root_provider.dart';
 import 'package:cctv5_vip/config/net_config.dart';
-import 'package:cctv5_vip/event/page/event_page.dart';
+import 'package:cctv5_vip/event/page/hovering_header_list_demo.dart';
 import 'package:cctv5_vip/home/page/home_page.dart';
 import 'package:cctv5_vip/http/http.dart';
 import 'package:cctv5_vip/mine/page/mine_page.dart';
@@ -52,7 +52,7 @@ class _RootPageState extends State<RootPage> {
         ),
         title: Text('我的')),
   ];
-  List<Widget> _childs = [HomePage(), EventPage(), MinePage()];
+  List<Widget> _childs = [HomePage(), HoveringHeaderListDemo(), MinePage()];
   @override
   void initState() {
     // TODO: implement initState

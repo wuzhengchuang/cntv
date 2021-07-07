@@ -13,7 +13,9 @@ class VideoCell extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (BuildContext context) {
-              return VideoDetailPage();
+              return VideoDetailPage(
+                video: video,
+              );
             },
             fullscreenDialog: true));
       },
@@ -30,7 +32,13 @@ class VideoCell extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: video != null
-                          ? NetworkImage(video.imgUrl)
+                          ? ResizeImage(
+                              NetworkImage(
+                                video.imgUrl,
+                              ),
+                              width: (MediaQuery.of(context).size.width - 30)
+                                  .toInt(),
+                              height: height.toInt())
                           : AssetImage('images/assets/1.jpeg'),
                       fit: BoxFit.fill),
                   borderRadius: BorderRadius.circular(5),
