@@ -7,4 +7,10 @@ class RootProvider extends ChangeNotifier {
     currentIndex = newIndex;
     notifyListeners();
   }
+
+  bool homeBannerAutoPlay = true;
+  void changeHomeBannerAutoPlay(bool newAutoPlay) {
+    homeBannerAutoPlay = newAutoPlay;
+    notifyListeners();
+  }
 }

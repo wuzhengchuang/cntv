@@ -1,7 +1,9 @@
+import 'package:cctv5_vip/base/root_provider.dart';
 import 'package:cctv5_vip/home/model/banner.dart' as HomeBanner;
 import 'package:cctv5_vip/home/page/banner_bg_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:provider/provider.dart';
 
 class Vip5BannerWidget extends StatefulWidget {
   HomeBanner.Banner banner;
@@ -15,6 +17,7 @@ class _Vip5BannerWidgetState extends State<Vip5BannerWidget> {
   static final _baseOffset = 10000; //初始化偏移
   static final _initOffset = 0; //初始化索引位
   double _bannerHeight = 0;
+
   int fixPosition(int realPos, int initPos, int length) {
     final int offset = realPos - initPos;
     int result = offset % length;
@@ -40,6 +43,8 @@ class _Vip5BannerWidgetState extends State<Vip5BannerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    bool autoPlay =
+        Provider.of<RootProvider>(context, listen: false).homeBannerAutoPlay;
     _bannerHeight =
         (MediaQuery.of(context).size.width - 20 - 20 - 10) * 189.0 / 336 +
             15 +
@@ -54,7 +59,7 @@ class _Vip5BannerWidgetState extends State<Vip5BannerWidget> {
           Swiper(
             itemBuilder: _cellForRow,
             itemCount: widget.banner.data.length,
-            autoplay: true,
+            autoplay: autoPlay,
             loop: true,
             pagination: SwiperPagination(
               alignment: Alignment.bottomCenter,
@@ -69,10 +74,20 @@ class _Vip5BannerWidgetState extends State<Vip5BannerWidget> {
                 MediaQuery.of(context).size.width),
             scale: 1.0,
             outer: true,
+            onIndexChanged: (index){
+
+            },
           )
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    print('轮播图页面销毁了');
+    // TODO: implement dispose
+    super.dispose();
   }
 }
 

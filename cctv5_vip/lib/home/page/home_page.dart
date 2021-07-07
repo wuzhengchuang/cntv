@@ -1,3 +1,4 @@
+import 'package:cctv5_vip/base/root_provider.dart';
 import 'package:cctv5_vip/config/net_config.dart';
 import 'package:cctv5_vip/home/model/banner.dart' as HomeBanner;
 import 'package:cctv5_vip/home/model/home.dart';
@@ -11,6 +12,7 @@ import 'package:cctv5_vip/http/http.dart';
 import 'package:cctv5_vip/tools/vip5_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomePage extends StatefulWidget {
@@ -98,83 +100,91 @@ class _HomePageState extends State<HomePage>
     _refresh();
   }
 
+  Future<bool> _willPop() {
+    Provider.of<RootProvider>(context, listen: false)
+        .changeHomeBannerAutoPlay(false);
+    return Future.value(true);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: [
-          Image(
-            image: AssetImage('images/assets/black_bg.png'),
-            fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-          ),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: Vip5AppBar(
-              // centerTitle: true,
-              // elevation: 0,
-              title: Image(
-                image: AssetImage('images/assets/cntv_logo.png'),
-                width: 53,
+    return WillPopScope(
+        child: Container(
+          child: Stack(
+            children: [
+              Image(
+                image: AssetImage('images/assets/black_bg.png'),
+                fit: BoxFit.cover,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
               ),
-              backgroundColor: Colors.transparent,
-            ),
-            body: Container(
-              child: SmartRefresher(
-                header: CustomHeader(
-                  builder: (BuildContext context, RefreshStatus mode) {
-                    return Container(
-                      height: 60,
-                      child: Center(
-                        child: Vip5CircleAnimation(),
-                      ),
-                    );
-                  },
+              Scaffold(
+                backgroundColor: Colors.transparent,
+                appBar: Vip5AppBar(
+                  // centerTitle: true,
+                  // elevation: 0,
+                  title: Image(
+                    image: AssetImage('images/assets/cntv_logo.png'),
+                    width: 53,
+                  ),
+                  backgroundColor: Colors.transparent,
                 ),
-                footer: CustomFooter(
-                  height: 40,
-                  builder: (BuildContext context, LoadStatus mode) {
-                    Widget body;
-                    if (mode == LoadStatus.idle) {
-                      body = Text(
-                        "上拉加载",
-                      );
-                    } else if (mode == LoadStatus.loading) {
-                      body = Text("正在加载数据");
-                    } else if (mode == LoadStatus.failed) {
-                      body = Text("加载失败请重试");
-                    } else if (mode == LoadStatus.canLoading) {
-                      body = Text("松手加载更多");
-                    } else {
-                      body = Text("没有更多数据了~~");
-                    }
-                    return Container(
-                      padding: EdgeInsets.only(top: 10),
-                      color: Colors.white,
-                      height: 1000.0,
-                      alignment: Alignment.topCenter,
-                      child: body,
-                    );
-                  },
-                ),
-                enablePullUp: true,
-                controller: _refreshController,
-                onRefresh: _refresh,
-                onLoading: _loading,
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: _cellForRow,
-                  padding:
-                      EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
-                  itemCount: _dataArray.length,
+                body: Container(
+                  child: SmartRefresher(
+                    header: CustomHeader(
+                      builder: (BuildContext context, RefreshStatus mode) {
+                        return Container(
+                          height: 60,
+                          child: Center(
+                            child: Vip5CircleAnimation(),
+                          ),
+                        );
+                      },
+                    ),
+                    footer: CustomFooter(
+                      height: 40,
+                      builder: (BuildContext context, LoadStatus mode) {
+                        Widget body;
+                        if (mode == LoadStatus.idle) {
+                          body = Text(
+                            "上拉加载",
+                          );
+                        } else if (mode == LoadStatus.loading) {
+                          body = Text("正在加载数据");
+                        } else if (mode == LoadStatus.failed) {
+                          body = Text("加载失败请重试");
+                        } else if (mode == LoadStatus.canLoading) {
+                          body = Text("松手加载更多");
+                        } else {
+                          body = Text("没有更多数据了~~");
+                        }
+                        return Container(
+                          padding: EdgeInsets.only(top: 10),
+                          color: Colors.white,
+                          height: 1000.0,
+                          alignment: Alignment.topCenter,
+                          child: body,
+                        );
+                      },
+                    ),
+                    enablePullUp: true,
+                    controller: _refreshController,
+                    onRefresh: _refresh,
+                    onLoading: _loading,
+                    child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: _cellForRow,
+                      padding:
+                          EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
+                      itemCount: _dataArray.length,
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
-    );
+        ),
+        onWillPop: _willPop);
   }
 
   @override
