@@ -1,14 +1,11 @@
 import 'dart:async';
 
-import 'package:cctv5_vip/base/launch_page.dart';
 import 'package:cctv5_vip/base/root_page.dart';
 import 'package:cctv5_vip/config/net_config.dart';
 import 'package:cctv5_vip/config/routes_config.dart';
-import 'package:cctv5_vip/config/types.dart';
 import 'package:cctv5_vip/web/vip5_web_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:orientation/orientation.dart';
 
 class CNTVApp extends StatefulWidget {
   @override
@@ -16,19 +13,10 @@ class CNTVApp extends StatefulWidget {
 }
 
 class _CNTVAppState extends State<CNTVApp> {
-  DeviceOrientation _deviceOrientation;
-  StreamSubscription<DeviceOrientation> subscription;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    subscription = OrientationPlugin.onOrientationChange.listen((value) {
-      if (!mounted) return;
-      setState(() {
-        _deviceOrientation = value;
-      });
-      OrientationPlugin.forceOrientation(value);
-    });
   }
 
   @override
@@ -54,9 +42,7 @@ class _CNTVAppState extends State<CNTVApp> {
                 ),
             RoutesConfig.VIP5ROOTPAGE: (_) => RootPage(),
           },
-          home: LaunchPage(
-            pageType: LaunchPageType.First,
-          ),
+          home: RootPage(),
         ),
         onWillPop: () {
           _dispose();
@@ -71,7 +57,5 @@ class _CNTVAppState extends State<CNTVApp> {
     super.dispose();
   }
 
-  _dispose() {
-    subscription?.cancel();
-  }
+  _dispose() {}
 }

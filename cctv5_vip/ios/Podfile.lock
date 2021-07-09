@@ -10,6 +10,8 @@ PODS:
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
+  - video_player (0.0.1):
+    - Flutter
   - vip5_video_player (0.0.1):
     - Flutter
   - webview_flutter (0.0.1):
@@ -20,6 +22,7 @@ DEPENDENCIES:
   - orientation (from `.symlinks/plugins/orientation/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
   - vip5_video_player (from `.symlinks/plugins/vip5_video_player/ios`)
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
 
@@ -36,6 +39,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
   vip5_video_player:
     :path: ".symlinks/plugins/vip5_video_player/ios"
   webview_flutter:
@@ -47,6 +52,7 @@ SPEC CHECKSUMS:
   orientation: 6c9203efe86ce4cff379756910f18b2d745628c3
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   vip5_video_player: 57c06e70c927e5ae4e16055590589e34c25d62a3
   webview_flutter: 3603125dfd3bcbc9d8d418c3f80aeecf331c068b
 

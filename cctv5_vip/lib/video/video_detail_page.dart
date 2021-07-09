@@ -2,6 +2,8 @@ import 'package:cctv5_vip/home/model/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vip5_video_player/vip5_video_player.dart';
+import 'package:vip5_video_player/vip5_video_player_controller.dart';
+import 'package:vip5_video_player/vip5_video_player_type.dart';
 
 class VideoDetailPage extends StatefulWidget {
   final Video video;
@@ -12,15 +14,26 @@ class VideoDetailPage extends StatefulWidget {
 
 class _VideoDetailPageState extends State<VideoDetailPage> {
   Vip5VideoPlayer _player;
+  Vip5VideoPlayerController _playerController;
+  _load(int state) {
+    if (state == CNPlayerLoadState.Playable) {
+      //加载完成自动播放
+      _playerController.start();
+    }
+  }
+
+  _playback(int state) {}
+  _vdnRequest(int state) {}
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _playerController = Vip5VideoPlayerController(params: {
+      'videoUrl': widget.video.guid,
+      'title': widget.video.title,
+    }, load: _load, playback: _playback, vdnRequest: _vdnRequest);
     _player = Vip5VideoPlayer(
-      params: {
-        'videoUrl': widget.video.guid,
-        'title': widget.video.title,
-      },
+      playerController: _playerController,
     );
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
@@ -49,25 +62,23 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                       children: [
                         InkWell(
                           onTap: () {
-                            _player.start();
+                            _playerController.start();
                           },
                           child: Text('开始'),
                         ),
                         InkWell(
                           onTap: () {
-                            _player.pause();
+                            _playerController.pause();
                           },
                           child: Text('暂停'),
                         ),
                         InkWell(
-                          onTap: () {
-                            _player.stop();
-                          },
+                          onTap: () {},
                           child: Text('停止'),
                         ),
                         InkWell(
                           onTap: () {
-                            _player.stop();
+                            // _playerController.dispose();
                             SystemChrome.setPreferredOrientations([
                               DeviceOrientation.portraitUp,
                               DeviceOrientation.portraitDown
@@ -86,7 +97,6 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
         ),
         onWillPop: () {
           print('onWillPop');
-
           return null;
         });
   }
@@ -94,6 +104,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
   @override
   void dispose() {
     print('VideoDetailPage销毁了');
+    _playerController.dispose();
     // TODO: implement dispose
     super.dispose();
   }
