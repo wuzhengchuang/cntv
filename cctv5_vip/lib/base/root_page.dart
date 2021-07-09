@@ -7,6 +7,7 @@ import 'package:cctv5_vip/mine/page/mine_page.dart';
 import 'package:cctv5_vip/style/vip5_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vip5_video_player/vip5_video_player_config.dart';
 
 class RootPage extends StatefulWidget {
   @override
@@ -57,6 +58,7 @@ class _RootPageState extends State<RootPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Vip5VideoPlayerConfig.configSDK();
     Http.instance.get(NetConfig().BASEURL, NetConfig().MAINCONFIGJSON,
         success: (data) {
       print(data);

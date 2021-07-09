@@ -126,7 +126,7 @@ packages:
       name: cli_util
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.2"
+    version: "0.3.3"
   clock:
     dependency: transitive
     description:
@@ -430,7 +430,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   pool:
     dependency: transitive
     description:
@@ -614,11 +614,9 @@ packages:
   vip5_video_player:
     dependency: "direct main"
     description:
-      path: vip5_video_player
-      ref: HEAD
-      resolved-ref: b1c9edb9adf6a8e1720d415e25dbd906860fde19
-      url: "https://github.com/wuzhengchuang/video_player.git"
-    source: git
+      path: "/Users/wuchuang/Desktop/Git/video_player/vip5_video_player"
+      relative: false
+    source: path
     version: "0.0.1"
   watcher:
     dependency: transitive
