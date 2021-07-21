@@ -13,7 +13,7 @@ void main() {
   OrientationPlugin.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   OrientationPlugin.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-  PaintingBinding.instance.imageCache.maximumSize = 50;
+  PaintingBinding.instance.imageCache.maximumSize = 20;
   if (Platform.isIOS) {
     SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
